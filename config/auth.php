@@ -45,6 +45,12 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+
+        //web.phpのルーティングの際に誰が認証されているかを取得するための名前を宣言「user」
+		'user' => [
+			'driver' => 'session',
+			'provider' => 'users',
+		],
     ],
 
     /*
