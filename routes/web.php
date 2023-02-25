@@ -11,12 +11,11 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::get('/', 'PostController@index')->name('index');
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//投稿一覧を表示させるルーティング
+Route::get('/', 'PostController@index')->name('index');
+
+Route::get('/newpost', 'PostController@newpost')->name('newpost');
+
+Route::post('/addpost', 'PostController@add')->name('addpost');

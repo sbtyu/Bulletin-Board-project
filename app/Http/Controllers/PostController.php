@@ -23,5 +23,36 @@ class PostController extends Controller
         //indexビューに値を渡す
         return view('index', compact('post', 'session'));
     }
-    //
+
+    public function newpost()
+    {
+        return view('newpost');
+    }
+
+    public function add(Request $request)
+    {
+        //ログインユーザのidを取得
+        $user_id = Auth::id();
+
+        //POST値のバリデーション実施
+		//required:入力必須項目
+		$request->validate([
+			'title' => 'required',
+			'text' => 'required',
+		]);
+
+        //フォームで送られてきた値を取得
+        $title = $request->input('title');
+        $text = $request->input('text');
+
+        $post = new Post();
+
+        $post->create([
+            'user_id' => $user_id,
+            'title' => $title,
+            'text' => $text,
+        ]);
+
+        return redirect(route('index'))->with('successMessage', '投稿を追加しました');
+    }
 }
