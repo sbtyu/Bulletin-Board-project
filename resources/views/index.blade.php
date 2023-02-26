@@ -34,6 +34,8 @@
                     <th>タイトル</th>
                     <th>本文</th>
                     <th>投稿日時</th>
+                    <th>更新日時</th>
+                    <th>編集・削除</th>
                 </tr>
 
                 @foreach ($post as $posts)
@@ -57,6 +59,22 @@
 
                     <td>
                         {{ $posts->created_at }}
+                    </td>
+
+                    <td>
+                        {{ $posts->updated_at }}
+                    </td>
+
+                
+                    <td>
+
+                    @if ($session == $posts->user_id )
+                    
+                    <a href="{{ route('editpost', $posts->id) }}" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">編集</a>
+
+                    @else
+                    @endif
+
                     </td>
 
                 </tr>

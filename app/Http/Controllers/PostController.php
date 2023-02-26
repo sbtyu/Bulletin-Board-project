@@ -55,4 +55,45 @@ class PostController extends Controller
 
         return redirect(route('index'))->with('successMessage', '投稿を追加しました');
     }
+
+    public function editpost(int $id)
+    {
+        //編集したい投稿の投稿IDを取得
+        $post = Post::find($id);
+
+        //現在ログイン中のユーザIDを取得
+        $user_id = Auth::id();
+
+        //他のユーザーの投稿を編集できないようにリダイレクト
+        if ($post->user_id != $user_id){
+            return redirect(route('index'));
+        }
+
+        return view('editpost', compact('post'));
+    }
+
+    public function update(Request $request, int $id) 
+    {
+        //POST値のバリデーション実施
+		//required:入力必須項目
+		$request->validate([
+			'title' => 'required',
+			'text' => 'required',
+		]);
+
+        $user_id = Auth::id();
+
+        //フォームで送られてきた値を取得
+        $title = $request->input('title');
+        $text = $request->input('text');
+
+        Post::where('id', '=', $id)->update([
+            'user_id' => $user_id,
+            'title' => $title,
+            'text' => $text,
+		]);
+
+        return redirect(route('index'))->with('successMessage', '投稿を編集しました');
+
+    }
 }

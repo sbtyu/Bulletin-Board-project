@@ -18,4 +18,8 @@ Route::get('/', 'PostController@index')->name('index');
 
 Route::get('/newpost', 'PostController@newpost')->name('newpost');
 
-Route::post('/addpost', 'PostController@add')->name('addpost');
+Route::post('/add', 'PostController@add')->name('add');
+
+Route::get('/editpost/{id}', 'PostController@editpost')->name('editpost');
+
+Route::post('/update/{id}', 'PostController@update')->name('update');
