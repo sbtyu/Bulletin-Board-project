@@ -96,4 +96,16 @@ class PostController extends Controller
         return redirect(route('index'))->with('successMessage', '投稿を編集しました');
 
     }
+
+    public function remove(int $id)
+    {
+        $user_id = Auth::id();
+        $post = Post::findOrFail($id);
+
+        if ($user_id == $post->user_id) {
+            $post->delete();
+            return redirect(route('index'))->with('successMessage', '投稿を削除しました');
+        }
+
+    }
 }

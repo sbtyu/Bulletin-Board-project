@@ -23,3 +23,5 @@ Route::post('/add', 'PostController@add')->name('add');
 Route::get('/editpost/{id}', 'PostController@editpost')->name('editpost');
 
 Route::post('/update/{id}', 'PostController@update')->name('update');
+
+Route::post('/remove/{id}', 'PostController@remove')->name('remove');
