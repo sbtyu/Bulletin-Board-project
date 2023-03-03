@@ -62,7 +62,7 @@ function select() {
                     </td>
 
                     <td>
-                        {{ $posts->user->name }}
+                        <a href="{{ route('user.profile', $posts->user->id) }}">{{ $posts->user->name }}</a>
                     </td>
 
                     <td>
