@@ -14,6 +14,8 @@ function select() {
 
 @if (session('successMessage'))
 <p class="alert alert-success text-center">{{ session('successMessage')}}</p>
+@elseif (session('errorMessage'))
+<p class="alert alert-danger text-center">{{ session('errorMessage')}}</p>
 @endif
 
 <div class="container">
