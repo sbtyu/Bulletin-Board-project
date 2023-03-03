@@ -25,3 +25,5 @@ Route::get('/editpost/{id}', 'PostController@editpost')->name('editpost');
 Route::post('/update/{id}', 'PostController@update')->name('update');
 
 Route::post('/remove/{id}', 'PostController@remove')->name('remove');
+
+Route::get('/profile/{id}', 'UserController@showProfile')->name('user.profile');
