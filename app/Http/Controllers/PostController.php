@@ -68,7 +68,7 @@ class PostController extends Controller
         //他のユーザーの投稿を編集できないようにリダイレクト
         if (!$post) {
             return redirect(route('index'))->with('errorMessage', '存在しない投稿です');
-        }elseif ($post->user_id != $user_id){
+        }elseif ($post->user_id !== $user_id){
             return redirect(route('index'))->with('errorMessage', '不正なアクセスです');
         }
 
