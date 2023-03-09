@@ -13,7 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //通信のSSL化のための記述
+        if (request()->isSecure()) {
+            \URL::forceScheme('https');
+        }
     }
 
     /**
