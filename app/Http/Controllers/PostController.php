@@ -11,14 +11,21 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        //postsテーブルから全てのカラムを取得
-        $post = Post::with('user')->get();
-
         //現在認証されているユーザを取得
         // Auth::user()->idと同様
         $session = Auth::id();
+        
+        if ($request->has('keyword')) {
+            $keyword = $request->input('keyword');
+            $post = Post::where('title', 'LIKE', "%$keyword%")
+                  ->orWhere('text', 'LIKE', "%$keyword%")
+                  ->get();
+        } else {
+             //postsテーブルから全てのカラムを取得
+            $post = Post::with('user')->get();
+        }
 
         //indexビューに値を渡す
         return view('index', compact('post', 'session'));

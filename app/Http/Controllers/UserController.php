@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Storage;
 
+use Intervention\Image\Facades\Image as Image;
 
 class UserController extends Controller
 {
@@ -49,17 +50,35 @@ class UserController extends Controller
 
         $user = User::find($id);
 
+        //一言コメントの処理
         if ($request->input('comment')) {
             $comment = $request->input('comment');
         } else {
             $comment = null;
         }
-
+        
+        //フロフィール画像の処理
         if ($request->file('image')) {
 
 			// アップロードされたファイル名を取得
 			$file = $request->file('image');
-            
+
+            // $resize_image = Image::make($file);
+
+            // $resize_image->resize(
+			// 	150,
+			// 	150,
+			// 	function ($constraint) {
+			// 		$constraint->aspectRatio();
+			// 	}
+			// );
+
+            // $filename = $file->getClientOriginalName();
+
+            // $resize_image_path = 'profile/' . $filename;
+
+            // $resize_image->save($resize_image_path);
+
             $path = Storage::disk('s3')->putFile('/', $file, 'public');
 
             $url = Storage::disk('s3')->url($path);
@@ -77,6 +96,6 @@ class UserController extends Controller
             'image' => $url,
 		]);
 
-         return redirect(route('user.profile', ['id' => $id]))->with('successMessage', 'プロフィールを編集しました');
+         return redirect(route('user.profile', compact('id')))->with('successMessage', 'プロフィールを編集しました');
     }
 }
