@@ -31,3 +31,5 @@ Route::get('/profile/{id}', 'UserController@showProfile')->name('user.profile');
 Route::get('/editprofile/{id}', 'UserController@editprofile')->name('user.editprofile');
 
 Route::post('/updateprofile/{id}', 'UserController@update')->name('user.update');
+
+Route::get('/result', 'PostController@search')->name('search');

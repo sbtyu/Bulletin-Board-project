@@ -18,8 +18,22 @@ function select() {
 <p class="alert alert-danger text-center">{{ session('errorMessage')}}</p>
 @endif
 
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2" style="margin-bottom:20px;">
+        <form class="form-inline" action="{{ route('index') }}">
+        <div class="form-group">
+            <input type="text" name="keyword" class="form-control" placeholder="キーワード">
+        </div>
+        <input type="submit" value="検索" class="btn btn-info">
+        </form>
+    </div>
+</div>
+
+
 <div class="container">
     <div class="panel panel-default">
+
          <div class="panel-heading">
             <h2 style="text-align:center">投稿一覧</h2>
 
@@ -38,6 +52,8 @@ function select() {
 
         <div class="panel-body">
 
+             @if (0 < $post->count())
+
             <table class="table table-striped">
 
                 <tr>
@@ -51,9 +67,6 @@ function select() {
                     <th>削除</th>
                 </tr>
 
-                @if (!$post)
-                <tr>投稿はありません</tr>
-                @else
                 @foreach ($post as $posts)
                 <tr>
 
@@ -99,10 +112,17 @@ function select() {
 
                 </tr>
                 @endforeach
-                @endif
-
             </table>
+
+            @else
+
+            <div class="text-center">
+            <h4>投稿がありません</h4>
+            </div>
+
+            @endif
         </div>
+        <a href="{{ route('index') }}"  class="mdl-button mdl-js-button mdl-button--primary">投稿一覧に戻る</a>
     </div>
 </div>
 @endsection

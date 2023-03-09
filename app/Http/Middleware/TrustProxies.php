@@ -12,7 +12,8 @@ class TrustProxies extends Middleware
      *
      * @var array
      */
-    protected $proxies;
+    //通信のSSL化のために追記
+    protected $proxies = '**';
 
     /**
      * The current proxy header mappings.
