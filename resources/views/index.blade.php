@@ -23,7 +23,7 @@ function select() {
     <div class="col-md-8 col-md-offset-2" style="margin-bottom:20px;">
         <form class="form-inline" action="{{ route('index') }}">
         <div class="form-group">
-            <input type="text" name="keyword" class="form-control" placeholder="キーワード">
+            <input type="text" name="keyword" class="form-control" placeholder="キーワード" value="{{ $keyword }}">
         </div>
         <input type="submit" value="検索" class="btn btn-info">
         </form>
@@ -122,7 +122,6 @@ function select() {
 
             @endif
         </div>
-        <a href="{{ route('index') }}"  class="mdl-button mdl-js-button mdl-button--primary">投稿一覧に戻る</a>
     </div>
 </div>
 @endsection

@@ -25,10 +25,11 @@ class PostController extends Controller
         } else {
              //postsテーブルから全てのカラムを取得
             $post = Post::with('user')->get();
+            $keyword = null;
         }
 
         //indexビューに値を渡す
-        return view('index', compact('post', 'session'));
+        return view('index', compact('post', 'keyword', 'session'));
     }
 
     public function newpost()
