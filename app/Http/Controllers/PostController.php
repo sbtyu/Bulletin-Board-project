@@ -85,14 +85,25 @@ class PostController extends Controller
 
     public function update(Request $request, int $id) 
     {
+        //編集したい投稿の投稿IDを取得
+        $post = Post::find($id);
+
+        $user_id = Auth::id();
+
+        //存在しない投稿IDへのアクセスがあった際のリダイレクト
+        //他のユーザーの投稿を編集できないようにリダイレクト
+        if (!$post) {
+            return redirect(route('index'))->with('errorMessage', '存在しない投稿です');
+        }elseif ($post->user_id !== $user_id){
+            return redirect(route('index'))->with('errorMessage', '不正なアクセスです');
+        }
+
         //POST値のバリデーション実施
 		//required:入力必須項目
 		$request->validate([
 			'title' => 'required',
 			'text' => 'required',
 		]);
-
-        $user_id = Auth::id();
 
         //フォームで送られてきた値を取得
         $title = $request->input('title');
