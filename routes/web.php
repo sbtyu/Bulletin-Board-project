@@ -20,7 +20,7 @@ Route::get('/newpost', 'PostController@newpost')->name('newpost');
 
 Route::post('/add', 'PostController@add')->name('add');
 
-Route::get('/editpost/{id}', 'PostController@editpost')->name('editpost');
+Route::get('/edit/post/{id}', 'PostController@editpost')->name('editpost');
 
 Route::post('/update/{id}', 'PostController@update')->name('update');
 
@@ -28,8 +28,6 @@ Route::post('/remove/{id}', 'PostController@remove')->name('remove');
 
 Route::get('/profile/{id}', 'UserController@showProfile')->name('user.profile');
 
-Route::get('/editprofile/{id}', 'UserController@editprofile')->name('user.editprofile');
+Route::get('/edit/profile/{id}', 'UserController@editprofile')->name('user.editprofile');
 
-Route::post('/updateprofile/{id}', 'UserController@update')->name('user.update');
-
-Route::get('/result', 'PostController@search')->name('search');
+Route::post('/update/profile/{id}', 'UserController@update')->name('user.update');
