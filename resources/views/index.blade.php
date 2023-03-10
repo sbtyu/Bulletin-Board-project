@@ -117,7 +117,7 @@ function select() {
             @else
 
             <div class="text-center">
-            <h4>投稿がありません</h4>
+            <h4>該当の投稿がありません</h4>
             </div>
 
             @endif
